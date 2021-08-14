@@ -66,40 +66,40 @@ fn move_bodies(bodies: &mut Vec<Body>) {
     }
 }
 
-fn get_influence_score(bodies: &Vec<Body>, body: &Body, size: usize) -> Vec<(usize, f32)> {
-    let mut t = bodies.iter().enumerate().map(|x| {
-        if x.1 == body {
-            return (x.0,0.0);
-        } 
-        return (x.0, x.1.mass as f32/((x.1.position - body.position).length()).abs());
-    }).collect::<Vec<(usize, f32)>>();
-    t.sort_by(|a,b| a.1.partial_cmp(&b.1).unwrap());
-    t.truncate(size);
-    t.split_at(size).1.to_owned()
-}
-
-// fn get_bodies_influence(bodies: &mut Vec<Body>, size: usize) -> Vec<Vec<Body>> {
-//     let mut res: Vec<Vec<Body>> = Vec::new();
-//     for b in bodies {
-//         get_influence_score(bodies, &bodies[0], size);
-//     }
-//     res
+// fn get_influence_score(bodies: &Vec<Body>, body: &Body, size: usize) -> Vec<(usize, f32)> {
+//     let mut t = bodies.iter().enumerate().map(|x| {
+//         if x.1 == body {
+//             return (x.0,0.0);
+//         } 
+//         return (x.0, x.1.mass as f32/((x.1.position - body.position).length()).abs());
+//     }).collect::<Vec<(usize, f32)>>();
+//     t.sort_by(|a,b| a.1.partial_cmp(&b.1).unwrap());
+//     t.truncate(size);
+//     t.split_at(size).1.to_owned()
 // }
+
+// // fn get_bodies_influence(bodies: &mut Vec<Body>, size: usize) -> Vec<Vec<Body>> {
+// //     let mut res: Vec<Vec<Body>> = Vec::new();
+// //     for b in bodies {
+// //         get_influence_score(bodies, &bodies[0], size);
+// //     }
+// //     res
+// // }
 
 #[cfg(test)]
 mod test {
-    use super::*;
-    #[test]
-    fn test() {        
-        let mut bodies = Vec::new();
-        let mut rng = thread_rng();
+    // use super::*;
+    // #[test]
+    // fn test() {        
+    //     let mut bodies = Vec::new();
+    //     let mut rng = thread_rng();
     
-        for _ in 1..100 {
-            bodies.push(Body::random(&mut rng, 100));
-        }
+    //     for _ in 1..100 {
+    //         bodies.push(Body::random(&mut rng, 100));
+    //     }
 
-        let r = get_influence_score(&bodies, &bodies[0], 4);
-        println!("{:?}", r);
-        assert_eq!(r.len(), 100);
-    }
+    //     let r = get_influence_score(&bodies, &bodies[0], 4);
+    //     println!("{:?}", r);
+    //     assert_eq!(r.len(), 100);
+    // }
 }
